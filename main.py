@@ -35,6 +35,7 @@ birthday1 = LunarDate(lubaryear1, y, z)#构建农历日期
 birthday2 = birthday1.to_solar_date()#转化成公历日期，输出为字符串
 
 #为读取星座准备
+birthday = LunarDate.birthday()
 birehday3 = birthday.to_solar_date()
 cmonth = int(birthday3[5:7])
 cdate = int(birthday3[8:])
