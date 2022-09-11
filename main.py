@@ -87,7 +87,7 @@ def get_weather_2():
 
 def get_weather_3():
   url = "http://wthrcdn.etouch.cn/WeatherApi?city=" + city
-  res3 = requests.get(url,headers=headers, params=data)
+  res3 = requests.get(url)
   if res3.status_code != 200:
     return res3()
   res31 = res3.csv()['resp']
