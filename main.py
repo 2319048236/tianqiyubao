@@ -31,14 +31,14 @@ lubaryear1 = today1.year
 x = int(birthday[0:4:1])#读取无用，为理解下面两行留着，可删去
 y = int(birthday[5:7])#切片
 z = int(birthday[8:])
-birthday1 = LunarDate(lubaryear1, y, z)#构建农历日期
+birthday1 = LunarDate(lubaryear1, y, z)#构建今年农历生日日期
 birthday2 = birthday1.to_solar_date()#转化成公历日期，输出为字符串
 
 #为读取星座准备
-birthday = LunarDate.birthday()
-birehday3 = birthday.to_solar_date()
-cmonth = int(birthday3[5:7])
-cdate = int(birthday3[8:])
+birthday3 = LunarDate(x, y, z)#构建农历生日日期
+birehday4 = birthday3.to_solar_date()
+cmonth = int(birthday4[5:7])
+cdate = int(birthday4[8:])
 sdate=[20,19,21,20,21,22,23,23,23,24,23,22]
 conts =['摩羯座','水瓶座','双鱼座','白羊座','金牛座','双子座','巨蟹座','狮子座','处女座','天秤座','天蝎座','射手座','摩羯座']
 def sign(cmonth,cdate):  
