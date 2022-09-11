@@ -86,11 +86,12 @@ def get_weather_2():
   return res21['sunrise'],res21['sunset'],res21['tips'],res21['weather'],res21['pop']
 
 def get_weather_3():
+  headers = {'User-Agent':'Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36'}
   url = "http://wthrcdn.etouch.cn/WeatherApi?city=" + city
-  res3 = requests.get(url)
+  res3 = requests.get(url,headers=headers)
   if res3.status_code != 200:
     return res3()
-  res31 = res3['resp']
+  res31 = res3.json['resp']
   return res21['forecast'],res21['zhishus']
 
 #星座
