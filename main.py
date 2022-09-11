@@ -90,7 +90,7 @@ def get_weather_3():
   res3 = requests.get(url,headers=headers, params=data)
   if res3.status_code != 200:
     return res3()
-  res31 = res3.json()['resp']
+  res31 = res3.csv()['resp']
   return res21['forecast'],res21['zhishus']
 
 #星座
