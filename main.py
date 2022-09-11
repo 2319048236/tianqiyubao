@@ -354,7 +354,7 @@ data = {
     "color": get_random_color()
   },
   "n": {
-    "value": 
+    "value": "",
     "color": get_random_color()
   },
   "o": {
@@ -362,7 +362,7 @@ data = {
     "color": get_random_color()
   },
   "p": {
-    "value": 
+    "value": "",
     "color": get_random_color()
   },
   "q": {
@@ -370,7 +370,7 @@ data = {
     "color": get_random_color()
   },
   "r": {
-    "value": 
+    "value": "",
     "color": get_random_color()
   },
   "s": {
@@ -378,7 +378,7 @@ data = {
     "color": get_random_color()
   },
   "t": {
-    "value": 
+    "value": "",
     "color": get_random_color()
   },
   "u": {
@@ -386,11 +386,11 @@ data = {
     "color": get_random_color()
   },
   "v": {
-    "value": 
+    "value": "",
     "color": get_random_color()
   },
   "w": {
-    "value": ,
+    "value": "",
     "color": "#FF0000",
   },
   "x": {
@@ -398,7 +398,7 @@ data = {
     "color": get_random_color()
   },
   "y": {
-    "value": 
+    "value": "",
     "color": get_random_color()
   },
   "z": {
@@ -406,7 +406,7 @@ data = {
     "color": get_random_color()
   },
   "A": {
-    "value": 
+    "value": "",
     "color": get_random_color()
   },
   "B": {
@@ -414,7 +414,7 @@ data = {
     "color": get_random_color()
   },
   "C": {
-    "value": 
+    "value": ""，
     "color": get_random_color()
   },
   "D": {
@@ -422,7 +422,7 @@ data = {
     "color": get_random_color()
   },
   "E": {
-    "value": 
+    "value": "",
     "color": get_random_color()
   },
 }
