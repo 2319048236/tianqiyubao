@@ -414,7 +414,7 @@ data = {
     "color": get_random_color()
   },
   "C": {
-    "value": ""，
+    "value": "",
     "color": get_random_color()
   },
   "D": {
