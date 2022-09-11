@@ -25,15 +25,27 @@ app_secret = os.getenv('APP_SECRET')
 user_ids = os.getenv('USER_ID', '').split("\n")
 url="https://lab.magiconch.com/sakana/?v=takina"
 template_id = os.getenv('TEMPLATE_ID')
-#template_id = os.getenv('TEMPLATE_ID')
 
 #为读取农历生日准备
 lubaryear1 = today1.year
-n = int(birthday[0:4:1])#读取无用，为理解下面两行留着，可删去
+x = int(birthday[0:4:1])#读取无用，为理解下面两行留着，可删去
 y = int(birthday[5:7])#切片
-r = int(birthday[8:])
-birthday1 = LunarDate(lubaryear1, y, r)#构建农历日期
+z = int(birthday[8:])
+birthday1 = LunarDate(lubaryear1, y, z)#构建农历日期
 birthday2 = birthday1.to_solar_date()#转化成公历日期，输出为字符串
+
+#为读取星座准备
+birehday3 = birthday.to_solar_date()
+cmonth = int(birthday3[5:7])
+cdate = int(birthday3[8:])
+sdate=[20,19,21,20,21,22,23,23,23,24,23,22]
+conts =['摩羯座','水瓶座','双鱼座','白羊座','金牛座','双子座','巨蟹座','狮子座','处女座','天秤座','天蝎座','射手座','摩羯座']
+def sign(cmonth,cdate):  
+  if cdate < sdate[cmonth-1]:   # 如果日数据早于对应月列表中对应的日期
+      print(conts[cmonth-1])       # 直接输出星座列表对应月对应的星座
+  else:
+      print(conts[cmonth])
+  return sign
 
 if app_id is None or app_secret is None:
   print('请设置 APP_ID 和 APP_SECRET')
@@ -52,7 +64,7 @@ if template_id is None:
   #exit(422)
 
 # weather 直接返回对象，在使用的地方用字段进行调用。
-def get_weather():
+def get_weather_1():
   if city is None:
     print('请设置城市')
     return None
@@ -64,7 +76,7 @@ def get_weather():
   return res11['week'],res11['alarm'],res11['aqi'], res11['win'],res11['win_speed'],res11['tem'], res11['tem2'], res11['tem1'],res11['air_tips']
 
 #天行数据接口
-def get_weather_wea():
+def get_weather_2():
   url = "http://api.tianapi.com/tianqi/index?key=d5edced4967c76fd11899dbe1b753d91&city=" + city
   res2 = requests.get(url,verify=False)
   if res2.status_code != 200:
@@ -72,9 +84,17 @@ def get_weather_wea():
   res21 = res2.json()['newslist'][0]
   return res21['sunrise'],res21['sunset'],res21['tips'],res21['weather'],res21['pop']
 
+def get_weather_3():
+  url = "http://wthrcdn.etouch.cn/WeatherApi?city=" + city
+  res3 = requests.get(url,verify=False)
+  if res3.status_code != 200:
+    return res3()
+  res31 = res3.json()['resp'][0]
+  return res21['forecast'],res21['zhishus']
+
 #星座
 def get_xingzuo():
-  url = "http://api.tianapi.com/star/index?key=d5edced4967c76fd11899dbe1b753d91&astro=双鱼座"
+  url = "http://api.tianapi.com/star/index?key=d5edced4967c76fd11899dbe1b753d91&astro=" + sign
   xingzuo = requests.get(url,verify=False)
   if xingzuo.status_code != 200:
     return get_xingzuo()
@@ -225,8 +245,9 @@ except WeChatClientException as e:
   exit(502)
 
 wm = WeChatMessage(client)
-week,alarm1,aqi,win,win_speed,tem,tem1,tem2,air_tips = get_weather()
-sunrise,sunset,tips,weather,pop = get_weather_wea()
+week,alarm1,aqi,win,win_speed,tem,tem1,tem2,air_tips = get_weather_1()
+sunrise,sunset,tips,weather,pop = get_weather_2()
+forecast,zhishus = get_weather_3()
 lubarmonth,lunarday,jieqi,lunar_festival,festival = get_lunar_calendar()
 sure_new_loc,sure_new_hid,present,danger1,danger2 = get_Covid_19()
 jieri = get_yuandan(),get_chunjie(),get_taqing(),get_laodong(),get_duanwu(),get_zhongqiu(),get_guoqing()
@@ -249,93 +270,91 @@ if weather is None:
   exit(422)
 data = {
   "1": {
-    "value":get_xingzuo(),
-  },
-  "2": {
-    "value":"",
-  },
-  "3": {
     "value":today.strftime('%Y年%m月%d日')+week,
     "color": get_random_color()
   },
-  "4": {
+  "2": {
     "value": lubarmonth+lunarday+jieqi+lunar_festival+festival,
     "color": get_random_color()
   },
-  "5":{
-    "value":jieri2,
+  "3": {
+    "value": jieri2,
     "color": get_random_color()
   },
-  "6": {
-    "value": "",
-    "color": get_random_color()
-  },
-  "7": {
+  "4": {
     "value": get_weather_icon(weather)+weather,
     "color": get_random_color()
   },
-  "8": {
-    "value": "",
-    "color": get_random_color()
-  },
-  "9": {
+  "5":{
     "value": city,
     "color": get_random_color()
   },
-  "a": {
-    "value": "",
-    "color": get_random_color()
-  },
-  "b": {
+  "6": {
     "value": tem,
     "color": get_random_color()
   },
-   "c": {
-    "value": "",
-    "color": get_random_color()
-  },
-  "d": {
+  "7": {
     "value": tem1+"℃"+"~"+tem2+"℃",
     "color": get_random_color()
   },
-  "e": {
-    "value": "",
-    "color": get_random_color()
-  },
-  "f": {
+  "8": {
     "value": sunrise,
     "color": get_random_color()
   },
-  "g": {
-    "value": "",
-    "color": get_random_color()
-  },
-  "h": {
+  "9": {
     "value": sunset,
     "color": get_random_color()
   },
-  "i": {
-    "value": "",
-    "color": get_random_color()
-  },
-  "j": {
+  "a": {
     "value": win+win_speed,
     "color": get_random_color()
   },
-  "k": {
-    "value": "",
-    "color": get_random_color()
-  },
-  "l": {
+  "b": {
     "value": pop+"%",
     "color": get_random_color()
   },
+   "c": {
+    "value": aqi['air_level'],
+    "color": get_random_color()
+  },
+  "d": {
+    "value": sure_new_loc,
+    "color": get_random_color()
+  },
+  "e": {
+    "value": sure_new_hid,
+    "color": get_random_color()
+  },
+  "f": {
+    "value": present,
+    "color": get_random_color()
+  },
+  "g": {
+    "value": str(danger1)+"/"+str(danger2),
+    "color": get_random_color()
+  },
+  "i": {
+    "value": alarm2,
+    "color": "#FF0000",
+  },
+  "j": {
+    "value": get_memorial_days_count(),
+    "color": get_random_color()
+  },
+  "k": {
+    "value": get_birthday_left(),
+    "color": get_random_color()
+  },
+  "l": {
+    "value": tips,
+    "color": get_random_color()
+  },
   "m": {
-    "value": "",
+    "value": get_words(),
     "color": get_random_color()
   },
   "n": {
-    "value": aqi['air_level'],
+    "value": 
     "color": get_random_color()
   },
   "o": {
@@ -343,7 +362,7 @@ data = {
     "color": get_random_color()
   },
   "p": {
-    "value": sure_new_loc,
+    "value": 
     "color": get_random_color()
   },
   "q": {
@@ -351,7 +370,7 @@ data = {
     "color": get_random_color()
   },
   "r": {
-    "value": sure_new_hid,
+    "value": 
     "color": get_random_color()
   },
   "s": {
@@ -359,7 +378,7 @@ data = {
     "color": get_random_color()
   },
   "t": {
-    "value": present,
+    "value": 
     "color": get_random_color()
   },
   "u": {
@@ -367,19 +386,19 @@ data = {
     "color": get_random_color()
   },
   "v": {
-    "value": str(danger1)+"/"+str(danger2),
+    "value": 
     "color": get_random_color()
   },
   "w": {
-    "value": alarm2,
-    "color": "#FF0000"
+    "value": ,
+    "color": "#FF0000",
   },
   "x": {
     "value": "",
     "color": get_random_color()
   },
   "y": {
-    "value": get_memorial_days_count(),
+    "value": 
     "color": get_random_color()
   },
   "z": {
@@ -387,7 +406,7 @@ data = {
     "color": get_random_color()
   },
   "A": {
-    "value": get_birthday_left(),
+    "value": 
     "color": get_random_color()
   },
   "B": {
@@ -395,7 +414,7 @@ data = {
     "color": get_random_color()
   },
   "C": {
-    "value": tips,
+    "value": 
     "color": get_random_color()
   },
   "D": {
@@ -403,7 +422,7 @@ data = {
     "color": get_random_color()
   },
   "E": {
-    "value": get_words(),
+    "value": 
     "color": get_random_color()
   },
 }
