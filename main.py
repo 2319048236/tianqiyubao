@@ -90,7 +90,7 @@ def get_weather_3():
   res31 = xmltodict.parse(res3.text)['resp']
   res311 = res31['forecast']['weather']
   res312 = res31['zhishus']['zhishu']
-  return res311[0]['day']['type'],res311[1]['day']['type'],res311[2]['day']['type'],res311[3]['day']['type'],res311[4]['day']['type'],res312[0]['value'],res312[1]['value'],res312[2]['detail'],res312[4]['detail']
+  return res311[0]['day']['type'],res311[1]['day']['type'],res311[2]['day']['type'],res311[3]['day']['type'],res311[4]['day']['type'],res312[0]['value'],res312[1]['value'],res312[2]['detail'],res312[4]['detail'],res312[3]['detail'],res312[5]['detail'],res312[6]['detail'],res312[7]['detail'],res312[9]['detail'],res312[10]['detail'],res312[11]['detail']
 
 #星座
 def get_xingzuo():
@@ -98,8 +98,8 @@ def get_xingzuo():
   xingzuo = requests.get(url,verify=False)
   if xingzuo.status_code != 200:
     return get_xingzuo()
-  data = xingzuo.json()
-  return data['newslist'][5]["content"],data['newslist'][3]["content"],data['newslist'][6]["content"]
+  data = xingzuo.json()['newslist']
+  return data[5]["content"],data[3]["content"],data[6]["content"],data[1]["content"],data[2]["content"],data[4]["content"],data[7]["content"],data[8]["content"]
 
 #疫情接口
 def get_Covid_19():
@@ -246,9 +246,9 @@ except WeChatClientException as e:
 wm = WeChatMessage(client)
 alarm1,aqi,win,win_speed,tem,tem1,tem2 = get_weather_1()
 week,sunrise,sunset,weather,pop = get_weather_2()
-Day_1,Day_2,Day_3,Day_4,Day_5,dressing,Ultraviolet,Skincare,cold = get_weather_3()
+Day_1,Day_2,Day_3,Day_4,Day_5,dressing,Ultraviolet,Skincare,cold,xiche,liangshai,huwai,wuran,zhongshu,shushi,shangyue = get_weather_3()
 lubarmonth,lunarday,jieqi,lunar_festival,festival = get_lunar_calendar()
-lucky,finances,shuzi = get_xingzuo()
+lucky,finances,shuzi,aiqing,gongzuo,jiankang,guiren,gaishu = get_xingzuo()
 sure_new_loc,sure_new_hid,present,danger1,danger2 = get_Covid_19()
 jieri = get_yuandan(),get_chunjie(),get_taqing(),get_laodong(),get_duanwu(),get_zhongqiu(),get_guoqing()
 jieri2 = ''.join(list(filter(None, jieri)))
@@ -375,6 +375,54 @@ data = {
   }, 
   "r": {
     "value": Ultraviolet,
+    "color": get_random_color()
+  }, 
+  "s": {
+    "value": xiche,
+    "color": get_random_color()
+  }, 
+  "t": {
+    "value": liangshai,
+    "color": get_random_color()
+  }, 
+  "u": {
+    "value": huwai,
+    "color": get_random_color()
+  }, 
+  "v": {
+    "value": wuran,
+    "color": get_random_color()
+  }, 
+  "w": {
+    "value": zhongshu,
+    "color": get_random_color()
+  }, 
+  "x": {
+    "value": shushi,
+    "color": get_random_color()
+  },
+  "y": {
+    "value": shangyue,
+    "color": get_random_color()
+  }, 
+  "z": {
+    "value": aiqing,
+    "color": get_random_color()
+  }, 
+  "A": {
+    "value": gongzuo,
+    "color": get_random_color()
+  }, 
+  "B": {
+    "value": jiankang,
+    "color": get_random_color()
+  }, 
+  "C": {
+    "value": guiren,
+    "color": get_random_color()
+  }, 
+  "D": {
+    "value": gaishu,
     "color": get_random_color()
   }, 
 }
