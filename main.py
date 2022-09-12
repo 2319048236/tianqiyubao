@@ -90,7 +90,7 @@ def get_weather_3():
   res31 = xmltodict.parse(res3.text)['resp']
   res311 = res31['forecast']['weather']
   res312 = res31['zhishus']['zhishu']
-  return res311[0]['day']['type'],res311[1]['day']['type'],res311[2]['day']['type'],res311[3]['day']['type'],res311[4]['day']['type'],res312[0]['value'],res312[1]['value'],res312[2]['value'],res312[4]['value']
+  return res311[0]['day']['type'],res311[1]['day']['type'],res311[2]['day']['type'],res311[3]['day']['type'],res311[4]['day']['type'],res312[0]['value'],res312[1]['value'],res312[2]['detail'],res312[4]['detail']
 
 #星座
 def get_xingzuo():
@@ -346,15 +346,15 @@ data = {
     "color": get_random_color()
   },
   "k": {
-    "value": Skincare,
+    "value": dressing,
     "color": get_random_color()
   },
   "l": {
-    "value": cold,
+    "value": Skincare,
     "color": get_random_color()
   },
   "m": {
-    "value": Ultraviolet,
+    "value": cold,
     "color": get_random_color()
   },
   "n": {
@@ -374,7 +374,7 @@ data = {
     "color": get_random_color()
   }, 
   "r": {
-    "value": dressing,
+    "value": Ultraviolet,#dressing,
     "color": get_random_color()
   }, 
 }
