@@ -132,16 +132,27 @@ def get_memorial_days_count():
   return delta.days
 
 # 生日倒计时
-def get_birthday_left():
-  if birthday is None:
-    print('没有设置 BIRTHDAY')
+def get_counter_left(aim_date):
+  if aim_date is None:
     return 0
-  next = datetime.strptime(birthday2.strftime("%Y-%m-%d"), "%Y-%m-%d")#先转换成datetime.date类型,再转换成datetime.datetime
-  if next < datetime.now():
-    birthday11 = LunarDate(lubaryear1+1, y, z)#构建今年农历生日日期
+
+  y = int(birthday[5:7])#切片
+  z = int(birthday[8:])
+  birthday1 = LunarDate(lubaryear1, y, z)#构建今年农历生日日期
+  birthday2 = birthday1.to_solar_date()
+  next = datetime.strptime(birthday2.strftime("%Y-%m-%d"), "%Y-%m-%d")
+
+  if next < nowtime:
+    birthday11 = LunarDate(lubaryear1+1, y, z)
     birthday21 = birthday11.to_solar_date()
     next = datetime.strptime(birthday21.strftime("%Y-%m-%d"), "%Y-%m-%d")
   return (next - today).days
+
+
+def split_birthday():
+  if birthday is None:
+    return None
+  return birthday.split('\n')
 
 #元旦节倒计时
 def get_yuandan():
@@ -355,10 +366,6 @@ data = {
     "value": get_memorial_days_count(),
     "color": get_random_color()
   },
-  "m": {
-    "value": get_birthday_left(),
-    "color": get_random_color()
-  },
   "n": {
     "value": alarm2,
     "color": "#FF0000",
@@ -428,6 +435,15 @@ data = {
     "color": get_random_color()
   }, 
 }
+
+for index, aim_date in enumerate(split_birthday()):
+  key_name = "m"
+  if index != 0:
+    key_name = key_name + "_%d" % index
+  data[key_name] = {
+    "value": get_counter_left(aim_date),
+    "color": get_random_color()
+  }
 
 if __name__ == '__main__':
   count = 0
