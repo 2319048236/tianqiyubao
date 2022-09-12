@@ -289,7 +289,7 @@ data = {
     "color": get_random_color()
   },
   "5":{
-    "value": city,
+    "value": forecast,#city,
     "color": get_random_color()
   },
   "6": {
