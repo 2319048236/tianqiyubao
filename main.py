@@ -138,9 +138,9 @@ def get_birthday_left():
     return 0
   next = datetime.strptime(birthday2.strftime("%Y-%m-%d"), "%Y-%m-%d")#先转换成datetime.date类型,再转换成datetime.datetime
   if next < datetime.now():
-    birthday1 = LunarDate(lubaryear1+1, y, z)#构建今年农历生日日期
-    birthday2 = birthday1.to_solar_date()
-    next = datetime.strptime(birthday2.strftime("%Y-%m-%d"), "%Y-%m-%d")
+    birthday11 = LunarDate(lubaryear1+1, y, z)#构建今年农历生日日期
+    birthday21 = birthday11.to_solar_date()
+    next = datetime.strptime(birthday21.strftime("%Y-%m-%d"), "%Y-%m-%d")
   return (next - today).days
 
 #元旦节倒计时
