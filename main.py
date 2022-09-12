@@ -87,11 +87,11 @@ def get_weather_2():
 
 def get_weather_3():
   url = "http://wthrcdn.etouch.cn/WeatherApi?city=" + city
-  res3 = requests.get(url,verify=False)
+  res3 = requests.get(url,verify=False).decode()
   if res3.status_code != 200:
     return res3()
-  res31 = res3.read().decode()
-  res32 = json.loads(res31)
+  #res31 = res3.read()
+  res32 = json.loads(res3)
   return res32['forecast'],res32['zhishus']
 
 #星座
