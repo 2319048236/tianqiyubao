@@ -3,14 +3,13 @@ from collections import defaultdict
 from wechatpy import WeChatClient, WeChatClientException
 from wechatpy.client.api import WeChatMessage
 from borax.calendars.lunardate import LunarDate
-from lxml import etree
 from random import randint
 import math
 import requests
 import os
 import re
 import random
-import emoji
+import xmltodict
 
 nowtime = datetime.utcnow() + timedelta(hours=8)  # 东八区时间
 today = datetime.strptime(str(nowtime.date()), "%Y-%m-%d") #今天的日期
@@ -47,7 +46,7 @@ def sign(cmonth,cdate):
       print(conts[int(cmonth)-1])       # 直接输出星座列表对应月对应的星座
   else:
       print(conts[int(cmonth)])
-  return sign
+  return sign(cmonth,cdate)
 
 if app_id is None or app_secret is None:
   print('请设置 APP_ID 和 APP_SECRET')
@@ -75,7 +74,7 @@ def get_weather_1():
   if res1.status_code != 200:
     return res1()
   res11 = res1.json()
-  return res11['week'],res11['alarm'],res11['aqi'], res11['win'],res11['win_speed'],res11['tem'], res11['tem2'], res11['tem1'],res11['air_tips']
+  return res11['alarm'],res11['aqi'], res11['win'],res11['win_speed'],res11['tem'], res11['tem2'], res11['tem1']
 
 #天行数据接口
 def get_weather_2():
@@ -84,26 +83,25 @@ def get_weather_2():
   if res2.status_code != 200:
     return res2()
   res21 = res2.json()['newslist'][0]
-  return res21['sunrise'],res21['sunset'],res21['tips'],res21['weather'],res21['pop']
+  return res21['week'],res21['sunrise'],res21['sunset'],res21['weather'],res21['pop']
 
 def get_weather_3():
   url = "http://wthrcdn.etouch.cn/WeatherApi?city=" + city
-  res3 = requests.get(url,verify=False)
-  if res3.status_code != 200:
-    return res3()
-  res31 = etree.HTML((res3.text).encode('utf-8'))
-  #res32 = res31.xpath('//*')
-  return res31.xpath('//yesterday'),res31.xpath('//zhishu')
+  res3 = requests.get(url)
+  res31 = xmltodict.parse(res3.text)['resp']
+  res311 = res31['forecast']['weather']
+  res312 = res31['zhishus']['zhishu']
+  return res311[0]['day']['type'],res311[1]['day']['type'],res311[2]['day']['type'],res311[3]['day']['type'],res311[4]['day']['type'],res312[0]['value'],res312[1]['value'],res312[2]['value'],res312[4]['value']
 
 #星座
 def get_xingzuo():
-  url = "http://api.tianapi.com/star/index?key=d5edced4967c76fd11899dbe1b753d91&astro=" + sign
+  url = "http://api.tianapi.com/star/index?key=d5edced4967c76fd11899dbe1b753d91&astro=" + sign(cmonth,cdate)
   xingzuo = requests.get(url,verify=False)
   if xingzuo.status_code != 200:
     return get_xingzuo()
   data = xingzuo.json()
-  data = "今天的幸运颜色："+str(data['newslist'][5]["content"])+"\n双鱼座的你今日爱情指数："+str(data['newslist'][1]["content"])+"\n速配星座："+str(data['newslist'][7]["content"])+"\n财运指数："+str(data['newslist'][3]["content"])+"\n今天的你："+str(data['newslist'][8]["content"])
-  return data
+  #data = "今天的幸运颜色："+str(data['newslist'][5]["content"])+"\n双鱼座的你今日爱情指数："+str(data['newslist'][1]["content"])+"\n速配星座："+str(data['newslist'][7]["content"])+"\n财运指数："+str(data['newslist'][3]["content"])+"\n今天的你："+str(data['newslist'][8]["content"])
+  return data['newslist'][5]["content"],data['newslist'][3]["content"]
 
 #疫情接口
 def get_Covid_19():
@@ -248,10 +246,11 @@ except WeChatClientException as e:
   exit(502)
 
 wm = WeChatMessage(client)
-week,alarm1,aqi,win,win_speed,tem,tem1,tem2,air_tips = get_weather_1()
-sunrise,sunset,tips,weather,pop = get_weather_2()
-forecast,zhishus = get_weather_3()
+alarm1,aqi,win,win_speed,tem,tem1,tem2 = get_weather_1()
+week,sunrise,sunset,weather,pop = get_weather_2()
+Day_1,Day_2,Day_3,Day_4,Day_5,dressing,Ultraviolet,Skincare,cold = get_weather_3()
 lubarmonth,lunarday,jieqi,lunar_festival,festival = get_lunar_calendar()
+lucky,finances = get_xingzuo()
 sure_new_loc,sure_new_hid,present,danger1,danger2 = get_Covid_19()
 jieri = get_yuandan(),get_chunjie(),get_taqing(),get_laodong(),get_duanwu(),get_zhongqiu(),get_guoqing()
 jieri2 = ''.join(list(filter(None, jieri)))
@@ -273,27 +272,27 @@ if weather is None:
   exit(422)
 data = {
   "1": {
-    "value":today.strftime('%Y年%m月%d日')+week,
+    "value": today.strftime('%Y年%m月%d日')+week,
     "color": get_random_color()
   },
   "2": {
-    "value": lubarmonth+lunarday+jieqi+lunar_festival+festival,
+    "value": lubarmonth+lunarday+jieqi+lunar_festival+festival+jieri2,
     "color": get_random_color()
   },
   "3": {
-    "value": jieri2,
-    "color": get_random_color()
-  },
-  "4": {
     "value": get_weather_icon(weather)+weather,
     "color": get_random_color()
   },
+  "4": {
+    "value": city,
+    "color": get_random_color()
+  },
   "5":{
-    "value": forecast,#city,
+    "value": tem+"℃",
     "color": get_random_color()
   },
   "6": {
-    "value": tem,
+    "value": Day_1+Day_2+Day_3+Day_4+Day_5,
     "color": get_random_color()
   },
   "7": {
@@ -316,43 +315,63 @@ data = {
     "value": pop+"%",
     "color": get_random_color()
   },
-   "c": {
+  "c": {
     "value": aqi['air_level'],
     "color": get_random_color()
   },
   "d": {
-    "value": sure_new_loc,
+    "value": lucky,
     "color": get_random_color()
   },
   "e": {
-    "value": sure_new_hid,
+    "value": finances,
     "color": get_random_color()
   },
   "f": {
-    "value": present,
+    "value": sure_new_loc,
     "color": get_random_color()
   },
   "g": {
-    "value": str(danger1)+"/"+str(danger2),
+    "value": sure_new_hid,
+    "color": get_random_color()
+  },
+  "h": {
+    "value": present,
     "color": get_random_color()
   },
   "i": {
-    "value": alarm2,
-    "color": "#FF0000",
+    "value": str(danger1)+"/"+str(danger2),
+    "color": get_random_color()
   },
   "j": {
-    "value": get_memorial_days_count(),
+    "value": dressing,
     "color": get_random_color()
   },
   "k": {
-    "value": get_birthday_left(),
+    "value": Ultraviolet,
     "color": get_random_color()
   },
   "l": {
-    "value": tips,
+    "value": Skincare,
     "color": get_random_color()
   },
   "m": {
+    "value": cold,
+    "color": get_random_color()
+  },
+  "n": {
+    "value": alarm2,
+    "color": "#FF0000",
+  },
+  "o": {
+    "value": get_memorial_days_count(),
+    "color": get_random_color()
+  },
+  "p": {
+    "value": get_birthday_left(),
+    "color": get_random_color()
+  },
+  "q": {
     "value": get_words(),
     "color": get_random_color()
   },
