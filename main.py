@@ -132,7 +132,10 @@ def get_memorial_days_count():
   return delta.days
 
 # 生日倒计时
-def get_birthday_left():
+def get_birthday_left(aim_date):
+  if aim_date is None:
+    return 0
+  
   if birthday is None:
     print('没有设置 BIRTHDAY')
     return 0
@@ -140,6 +143,11 @@ def get_birthday_left():
   if next < datetime.now():
     next = next.replace(year=next.year + 1)
   return (next - today).days
+
+def split_birthday():
+  if birthday is None:
+    return None
+  return birthday.split('\n')
 
 #元旦节倒计时
 def get_yuandan():
