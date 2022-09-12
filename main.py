@@ -94,7 +94,7 @@ def get_weather_3():
   #res31 = res3.xml()
   #res31 = res3.json
   #res32 = json.loads(res31)
-  res31 = etree.HTML(res3,etree.HTML.HTMLParderc)
+  res31 = etree.HTML(res3)
   #res32 = etree.tostringlist(res31)
   res32 = heml.xpath('//*')
   return res32['forecast'],res32['zhishus']
