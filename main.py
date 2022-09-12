@@ -33,7 +33,6 @@ y = int(birthday[5:7])#切片
 z = int(birthday[8:])
 birthday1 = LunarDate(lubaryear1, y, z)#构建今年农历生日日期
 birthday2 = birthday1.to_solar_date()#转化成公历日期，输出为字符串
-print(birthday2)
 
 #为读取星座准备
 birthday3 = LunarDate(x, y, z)#构建农历生日日期
@@ -139,7 +138,9 @@ def get_birthday_left():
     return 0
   next = datetime.strptime(birthday2.strftime("%Y-%m-%d"), "%Y-%m-%d")#先转换成datetime.date类型,再转换成datetime.datetime
   if next < datetime.now():
-    next = next.replace(year=next.year + 1)
+    birthday1 = LunarDate(lubaryear1+1, y, z)#构建今年农历生日日期
+    birthday2 = birthday1.to_solar_date()
+    next = datetime.strptime(birthday2.strftime("%Y-%m-%d"), "%Y-%m-%d")
   return (next - today).days
 
 #元旦节倒计时
