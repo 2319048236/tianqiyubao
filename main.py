@@ -99,7 +99,7 @@ def get_xingzuo():
   if xingzuo.status_code != 200:
     return get_xingzuo()
   data = xingzuo.json()
-  return data['newslist'][5]["content"],data['newslist'][3]["content"],data['newslist'][5]["content"]
+  return data['newslist'][5]["content"],data['newslist'][3]["content"],data['newslist'][6]["content"]
 
 #疫情接口
 def get_Covid_19():
@@ -322,11 +322,11 @@ data = {
     "color": get_random_color()
   },
   "e": {
-    "value": lucky,
+    "value": finances,
     "color": get_random_color()
   },
   "f": {
-    "value": finances,
+    "value": lucky,
     "color": get_random_color()
   },
   "g": {
@@ -350,11 +350,11 @@ data = {
     "color": get_random_color()
   },
   "l": {
-    "value": Skincare,
+    "value": get_memorial_days_count(),
     "color": get_random_color()
   },
   "m": {
-    "value": cold,
+    "value": get_birthday_left(),
     "color": get_random_color()
   },
   "n": {
@@ -362,11 +362,11 @@ data = {
     "color": "#FF0000",
   },
   "o": {
-    "value": get_memorial_days_count(),
+    "value": Skincare,
     "color": get_random_color()
   },
   "p": {
-    "value": get_birthday_left(),
+    "value": cold,
     "color": get_random_color()
   },
   "q": {
@@ -374,7 +374,7 @@ data = {
     "color": get_random_color()
   }, 
   "r": {
-    "value": Ultraviolet,#dressing,
+    "value": Ultraviolet,
     "color": get_random_color()
   }, 
 }
