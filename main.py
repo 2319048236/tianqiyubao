@@ -99,8 +99,7 @@ def get_xingzuo():
   if xingzuo.status_code != 200:
     return get_xingzuo()
   data = xingzuo.json()
-  #data = "今天的幸运颜色："+str(data['newslist'][5]["content"])+"\n双鱼座的你今日爱情指数："+str(data['newslist'][1]["content"])+"\n速配星座："+str(data['newslist'][7]["content"])+"\n财运指数："+str(data['newslist'][3]["content"])+"\n今天的你："+str(data['newslist'][8]["content"])
-  return data['newslist'][5]["content"],data['newslist'][3]["content"]
+  return data['newslist'][5]["content"],data['newslist'][3]["content"],data['newslist'][5]["content"]
 
 #疫情接口
 def get_Covid_19():
@@ -249,7 +248,7 @@ alarm1,aqi,win,win_speed,tem,tem1,tem2 = get_weather_1()
 week,sunrise,sunset,weather,pop = get_weather_2()
 Day_1,Day_2,Day_3,Day_4,Day_5,dressing,Ultraviolet,Skincare,cold = get_weather_3()
 lubarmonth,lunarday,jieqi,lunar_festival,festival = get_lunar_calendar()
-lucky,finances = get_xingzuo()
+lucky,finances,shuzi = get_xingzuo()
 sure_new_loc,sure_new_hid,present,danger1,danger2 = get_Covid_19()
 jieri = get_yuandan(),get_chunjie(),get_taqing(),get_laodong(),get_duanwu(),get_zhongqiu(),get_guoqing()
 jieri2 = ''.join(list(filter(None, jieri)))
@@ -291,7 +290,7 @@ data = {
     "color": get_random_color()
   },
   "6": {
-    "value": Day_1+Day_2+Day_3+Day_4+Day_5,
+    "value": Day_1+"~"+Day_2+"~"+Day_3+"~"+Day_4+"~"+Day_5,
     "color": get_random_color()
   },
   "7": {
@@ -319,43 +318,43 @@ data = {
     "color": get_random_color()
   },
   "d": {
-    "value": lucky,
+    "value": shuzi,
     "color": get_random_color()
   },
   "e": {
-    "value": finances,
+    "value": lucky,
     "color": get_random_color()
   },
   "f": {
-    "value": sure_new_loc,
+    "value": finances,
     "color": get_random_color()
   },
   "g": {
-    "value": sure_new_hid,
+    "value": sure_new_loc,
     "color": get_random_color()
   },
   "h": {
-    "value": present,
+    "value": sure_new_hid,
     "color": get_random_color()
   },
   "i": {
-    "value": str(danger1)+"/"+str(danger2),
+    "value": present,
     "color": get_random_color()
   },
   "j": {
-    "value": dressing,
+    "value": str(danger1)+"/"+str(danger2),
     "color": get_random_color()
   },
   "k": {
-    "value": Ultraviolet,
-    "color": get_random_color()
-  },
-  "l": {
     "value": Skincare,
     "color": get_random_color()
   },
-  "m": {
+  "l": {
     "value": cold,
+    "color": get_random_color()
+  },
+  "m": {
+    "value": Ultraviolet,
     "color": get_random_color()
   },
   "n": {
@@ -372,6 +371,10 @@ data = {
   },
   "q": {
     "value": get_words(),
+    "color": get_random_color()
+  }, 
+  "r": {
+    "value": dressing,
     "color": get_random_color()
   }, 
 }
