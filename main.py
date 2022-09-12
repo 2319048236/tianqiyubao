@@ -136,8 +136,8 @@ def get_counter_left(aim_date):
   if aim_date is None:
     return 0
 
-  y = int(birthday[5:7])#切片
-  z = int(birthday[8:10])
+  y = int(aim_date[5:7])#切片
+  z = int(aim_date[8:10])
   birthday1 = LunarDate(lubaryear1, y, z)#构建今年农历生日日期
   birthday2 = birthday1.to_solar_date()
   next = datetime.strptime(birthday2.strftime("%Y-%m-%d"), "%Y-%m-%d")
