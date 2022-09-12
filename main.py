@@ -90,7 +90,7 @@ def get_weather_3():
   res3 = requests.get(url,verify=False).decode()
   if res3.status_code != 200:
     return res3()
-  #res31 = res3.read()
+  res31 = res3.json
   res32 = json.loads(res3)
   return res32['forecast'],res32['zhishus']
 
