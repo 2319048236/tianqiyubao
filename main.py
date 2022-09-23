@@ -95,7 +95,7 @@ def get_weather_3():
     #headers = {'Connection':'close'}
     #res3 = requests.post(url, headers=headers)
     #res3 = requests.get(url)
-    res3 = requests.session(url)
+    res3 = requests.session()
     res3.keep_alive = False
     res31 = xmltodict.parse(res3.text)['resp']
     res311 = res31['forecast']['weather']
