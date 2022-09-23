@@ -96,9 +96,8 @@ def get_weather_3():
     s.keep_alive = False
     s.proxies = { "http": "36.248.10.47:8080", }
     res3 = s.get(url)
-    #res3 = requests.get(url)
-    #res3.keep_alive = False
-    print(res3)
+    if res3.status_code != 200:
+        return res3
     res31 = xmltodict.parse(res3.text)['resp']
     res311 = res31['forecast']['weather']
     res312 = res31['zhishus']['zhishu']
@@ -113,7 +112,7 @@ def get_xingzuo():
     url = "http://api.tianapi.com/star/index?key=d5edced4967c76fd11899dbe1b753d91&astro=" + sign(cmonth, cdate)
     xingzuo = requests.get(url, verify=False)
     if xingzuo.status_code != 200:
-        return get_xingzuo()
+        return xingzuo
     data = xingzuo.json()['newslist']
     return data[5]["content"], data[3]["content"], data[6]["content"], data[1]["content"], data[2]["content"], data[4][
         "content"], data[7]["content"], data[8]["content"]
