@@ -94,7 +94,7 @@ def get_weather_3():
     s = requests.session()
     url = "http://wthrcdn.etouch.cn/WeatherApi?city=" + city
     s.keep_alive = False
-    s.proxies = { "http": "36.248.10.47:8080", }
+    s.proxies = { "http": "124.71.186.187", }
     res3 = s.get(url)
     if res3.status_code != 200:
         return res3
