@@ -91,12 +91,13 @@ def get_weather_2():
 
 
 def get_weather_3():
+    s = requests.session()
     url = "http://wthrcdn.etouch.cn/WeatherApi?city=" + city
-    #headers = {'Connection':'close'}
-    #res3 = requests.post(url, headers=headers)
+    s.keep_alive = False
+    s.proxies = { "http": "36.248.10.47:8080", }
+    res3 = s.get(url)
     #res3 = requests.get(url)
-    res3 = requests.session()
-    res3.keep_alive = False
+    #res3.keep_alive = False
     print(res3)
     res31 = xmltodict.parse(res3.text)['resp']
     res311 = res31['forecast']['weather']
