@@ -98,7 +98,7 @@ def get_weather_3():
     res3 = requests.session()
     res3.keep_alive = False
     print(res3)
-    res31 = xmltodict.parse(res3)['resp']
+    res31 = xmltodict.parse(res3.text)['resp']
     res311 = res31['forecast']['weather']
     res312 = res31['zhishus']['zhishu']
     return res311[0]['day']['type'], res311[1]['day']['type'], res311[2]['day']['type'], res311[3]['day']['type'], \
