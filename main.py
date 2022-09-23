@@ -79,7 +79,6 @@ def get_weather_1():
     res11 = res1.json()
     return res11['alarm'], res11['aqi'], res11['win'], res11['win_speed'], res11['tem'], res11['tem2'], res11['tem1']
 
-"""
 # 天行数据接口
 def get_weather_2():
     url = "http://api.tianapi.com/tianqi/index?key=d5edced4967c76fd11899dbe1b753d91&city=" + city
@@ -99,7 +98,7 @@ def get_weather_3():
     res31 = res3.json()['data']
     res311 = res31[0]['index']
     return res31[1]['wea'],res31[2]['wea'],res31[3]['wea'],res31[4]['wea'],res31[5]['wea'],res31[6]['wea'],res311[0]['desc'],res311[1]['desc'],res311[2]['desc'],res311[3]['desc'],res311[4]['desc'],res311[5]['desc'],res311
-
+"""
 
 # 星座
 def get_xingzuo():
@@ -283,8 +282,8 @@ except WeChatClientException as e:
 
 wm = WeChatMessage(client)
 alarm1, aqi, win, win_speed, tem, tem1, tem2 = get_weather_1()
-#week, sunrise, sunset, weather, pop = get_weather_2()
-Day_1, Day_2, Day_3, Day_4, Day_5, Day_6, Ultraviolet, jianfei, xuetang, dressing, xiche, air_pollution = get_weather_3()
+week, sunrise, sunset, weather, pop = get_weather_2()
+#Day_1, Day_2, Day_3, Day_4, Day_5, Day_6, Ultraviolet, jianfei, xuetang, dressing, xiche, air_pollution = get_weather_3()
 lubarmonth, lunarday, jieqi, lunar_festival, festival = get_lunar_calendar()
 lucky, finances, shuzi, aiqing, gongzuo, jiankang, guiren, gaishu = get_xingzuo()
 sure_new_loc, sure_new_hid, present, danger1, danger2 = get_Covid_19()
@@ -330,7 +329,7 @@ data = {
         "color": get_random_color()
     },
     "6": {
-        "value": Day_1 + "~" + Day_2 + "~" + Day_3 + "~" + Day_4 + "~" + Day_5+ "~" + Day_6,
+        "value": "",#Day_1 + "~" + Day_2 + "~" + Day_3 + "~" + Day_4 + "~" + Day_5+ "~" + Day_6,
         "color": get_random_color()
     },
     "7": {
@@ -398,11 +397,11 @@ data = {
         "color": "#FF0000",
     },
     "o": {
-        "value": Ultraviolet,
+        "value": "",#Ultraviolet,
         "color": get_random_color()
     },
     "p": {
-        "value": jianfei,
+        "value": "",jianfei,
         "color": get_random_color()
     },
     "q": {
@@ -410,15 +409,15 @@ data = {
         "color": get_random_color()
     },
     "r": {
-        "value": xuetang,
+        "value": "",xuetang,
         "color": get_random_color()
     },
     "s": {
-        "value": xiche,
+        "value": "",xiche,
         "color": get_random_color()
     },
     "t": {
-        "value": air_pollution,
+        "value": "",air_pollution,
         "color": get_random_color()
     },
     "z": {
