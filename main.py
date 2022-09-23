@@ -91,20 +91,14 @@ def get_weather_2():
 
 
 def get_weather_3():
-    url = "http://wthrcdn.etouch.cn/WeatherApi?city=" + city
-    requests.adapters.DEFAULT_RETRIES = 5 # 增加重连次数
-    s = requests.session()
-    s.keep_alive = False # 关闭多余连接
-    res3 = s.get(url)
+    url = "http://www.tianqiapi.com/api?version=v1&appid=78158848&appsecret=650ylFRx&city=" + city
+    res3 = requests.get(url)
     if res3.status_code != 200:
         return res3
-    res31 = xmltodict.parse(res3.text)['resp']
-    res311 = res31['forecast']['weather']
-    res312 = res31['zhishus']['zhishu']
-    return res311[0]['day']['type'], res311[1]['day']['type'], res311[2]['day']['type'], res311[3]['day']['type'], \
-           res311[4]['day']['type'], res312[0]['value'], res312[1]['value'], res312[2]['detail'], res312[4]['detail'], \
-           res312[3]['detail'], res312[5]['detail'], res312[6]['detail'], res312[7]['detail'], res312[9]['detail'], \
-           res312[10]['detail'], res312[11]['detail']
+    #res31 = xmltodict.parse(res3.text)['resp']
+    res31 = res3.json()['data']
+    res311 = res31[0]['index']
+    return res31[1]['wea'],res31[2]['wea'],res31[3]['wea'],res31[4]['wea'],res31[5]['wea'],res31[6]['wea'],res311[0]['desc'],res311[1]['desc'],res311[2]['desc'],res311[3]['desc'],res311[4]['desc'],res311[5]['desc'],res311
 
 
 # 星座
@@ -290,7 +284,7 @@ except WeChatClientException as e:
 wm = WeChatMessage(client)
 alarm1, aqi, win, win_speed, tem, tem1, tem2 = get_weather_1()
 week, sunrise, sunset, weather, pop = get_weather_2()
-Day_1, Day_2, Day_3, Day_4, Day_5, dressing, Ultraviolet, Skincare, cold, xiche, liangshai, huwai, wuran, zhongshu, shushi, shangyue = get_weather_3()
+Day_1, Day_2, Day_3, Day_4, Day_5, Day_6,Ultraviolet, jianfei, xuetang, dressing, xiche, air_pollution = get_weather_3()
 lubarmonth, lunarday, jieqi, lunar_festival, festival = get_lunar_calendar()
 lucky, finances, shuzi, aiqing, gongzuo, jiankang, guiren, gaishu = get_xingzuo()
 sure_new_loc, sure_new_hid, present, danger1, danger2 = get_Covid_19()
@@ -336,7 +330,7 @@ data = {
         "color": get_random_color()
     },
     "6": {
-        "value": Day_1 + "~" + Day_2 + "~" + Day_3 + "~" + Day_4 + "~" + Day_5,
+        "value": Day_1 + "~" + Day_2 + "~" + Day_3 + "~" + Day_4 + "~" + Day_5+ "~" + Day_6,
         "color": get_random_color()
     },
     "7": {
@@ -404,11 +398,11 @@ data = {
         "color": "#FF0000",
     },
     "o": {
-        "value": Skincare,
+        "value": Ultraviolet,
         "color": get_random_color()
     },
     "p": {
-        "value": cold,
+        "value": jianfei,
         "color": get_random_color()
     },
     "q": {
@@ -416,7 +410,7 @@ data = {
         "color": get_random_color()
     },
     "r": {
-        "value": Ultraviolet,
+        "value": xuetang,
         "color": get_random_color()
     },
     "s": {
@@ -424,27 +418,7 @@ data = {
         "color": get_random_color()
     },
     "t": {
-        "value": liangshai,
-        "color": get_random_color()
-    },
-    "u": {
-        "value": huwai,
-        "color": get_random_color()
-    },
-    "v": {
-        "value": wuran,
-        "color": get_random_color()
-    },
-    "w": {
-        "value": zhongshu,
-        "color": get_random_color()
-    },
-    "x": {
-        "value": shushi,
-        "color": get_random_color()
-    },
-    "y": {
-        "value": shangyue,
+        "value": air_pollution,
         "color": get_random_color()
     },
     "z": {
