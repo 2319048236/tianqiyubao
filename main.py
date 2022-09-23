@@ -385,7 +385,7 @@ data = {
         "color": get_random_color()
     },
     "k": {
-        "value": "",#dressing,
+        "value": dressing,
         "color": get_random_color()
     },
     "l": {
@@ -397,11 +397,11 @@ data = {
         "color": "#FF0000",
     },
     "o": {
-        "value": "",#Ultraviolet,
+        "value": Ultraviolet,
         "color": get_random_color()
     },
     "p": {
-        "value": "",#jianfei,
+        "value": jianfei,
         "color": get_random_color()
     },
     "q": {
@@ -409,15 +409,15 @@ data = {
         "color": get_random_color()
     },
     "r": {
-        "value": "",#xuetang,
+        "value": xuetang,
         "color": get_random_color()
     },
     "s": {
-        "value": "",#xiche,
+        "value": xiche,
         "color": get_random_color()
     },
     "t": {
-        "value": "",#air_pollution,
+        "value": air_pollution,
         "color": get_random_color()
     },
     "z": {
