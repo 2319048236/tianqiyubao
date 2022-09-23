@@ -91,10 +91,10 @@ def get_weather_2():
 
 
 def get_weather_3():
-    s = requests.session()
     url = "http://wthrcdn.etouch.cn/WeatherApi?city=" + city
-    s.keep_alive = False
-    s.proxies = { "http": "124.71.186.187", }
+    requests.adapters.DEFAULT_RETRIES = 5 # 增加重连次数
+    s = requests.session()
+    s.keep_alive = False # 关闭多余连接
     res3 = s.get(url)
     if res3.status_code != 200:
         return res3
