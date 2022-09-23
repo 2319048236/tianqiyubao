@@ -93,7 +93,7 @@ def get_weather_2():
 def get_weather_3():
     url = "http://wthrcdn.etouch.cn/WeatherApi?city=" + city
     headers = {'Connection':'close'}
-    res3 = requests.post(url, json.dumps(data), headers=headers)
+    res3 = requests.post(url, headers=headers)
     #res3 = requests.get(url)
     #res3 = requests.session()
     #res3.keep_alive = False
