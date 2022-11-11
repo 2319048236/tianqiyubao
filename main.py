@@ -97,7 +97,7 @@ def get_weather_3():
     #res31 = xmltodict.parse(res3.text)['resp']
     res31 = res3.json()['data']
     res311 = res31[0]['index']
-    return res31[1]['wea'],res31[2]['wea'],res31[3]['wea'],res31[4]['wea'],res31[5]['wea'],res31[6]['wea'],res311[0]['desc'],res311[1]['desc'],res311[2]['desc'],res311[3]['desc'],res311[4]['desc'],res311[5]['desc'],res31['week'], res31['sunrise'], res31['sunset'], res31['wea'],
+    return res31[1]['wea'],res31[2]['wea'],res31[3]['wea'],res31[4]['wea'],res31[5]['wea'],res31[6]['wea'],res311[0]['desc'],res311[1]['desc'],res311[2]['desc'],res311[3]['desc'],res311[4]['desc'],res311[5]['desc'],res31[0]['week'], res31[0]['sunrise'], res31[0]['sunset'], res31[0]['wea'],
 
 
 # 星座
