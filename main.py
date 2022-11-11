@@ -338,7 +338,7 @@ data = {
         "color": get_random_color()
     },
     "b": {
-        "value":  + "%",
+        "value": "%",
         "color": get_random_color()
     },
     "c": {
