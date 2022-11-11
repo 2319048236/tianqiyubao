@@ -292,10 +292,6 @@ def get_weather_icon(weather):
             break
     return weather_icon
 
-
-if weather is None:
-    print('获取天气失败')
-    exit(422)
 data = {
     "1": {
         "value": today.strftime('%Y年%m月%d日') + week,
