@@ -272,7 +272,7 @@ except WeChatClientException as e:
 
 wm = WeChatMessage(client)
 alarm1, aqi, win, win_speed, tem, tem1, tem2 = get_weather_1()
-Day_1, Day_2, Day_3, Day_4, Day_5, Day_6, Ultraviolet, jianfei, xuetang, dressing, xiche, air_pollution,week, sunrise, sunset, weatherther = get_weather_3()
+Day_1, Day_2, Day_3, Day_4, Day_5, Day_6, Ultraviolet, jianfei, xuetang, dressing, xiche, air_pollution,week, sunrise, sunset, weather = get_weather_3()
 lubarmonth, lunarday, jieqi, lunar_festival, festival = get_lunar_calendar()
 lucky, finances, shuzi, aiqing, gongzuo, jiankang, guiren, gaishu = get_xingzuo()
 sure_new_loc, sure_new_hid, present, danger1, danger2 = get_Covid_19()
