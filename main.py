@@ -318,7 +318,7 @@ data = {
         "color": get_random_color()
     },
     "a": {
-        "value": win[0] + win_speed,
+        "value": win[0],
         "color": get_random_color()
     },
     "b": {
