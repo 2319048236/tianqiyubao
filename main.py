@@ -76,7 +76,7 @@ def get_weather_3():
     #res31 = xmltodict.parse(res3.text)['resp']
     res31 = res3.json()['data']
     res311 = res31[0]['index']
-    return res31[1]['wea'],res31[2]['wea'],res31[3]['wea'],res31[4]['wea'],res31[5]['wea'],res31[6]['wea'],res311[0]['desc'],res311[1]['desc'],res311[2]['desc'],res311[3]['desc'],res311[4]['desc'],res311[5]['desc'],res31[0]['week'], res31[0]['sunrise'], res31[0]['sunset'], res31[0]['wea'],res31[0]['humidity'],res31[0]['alarm'], res31[0]['air'], res31[0]['win'], res31[0]['win_speed'], res31[0]['tem'], res31[0]['tem2'], res31[0]['tem1']
+    return res31[1]['wea'],res31[2]['wea'],res31[3]['wea'],res31[4]['wea'],res31[5]['wea'],res31[6]['wea'],res311[0]['desc'],res311[1]['desc'],res311[2]['desc'],res311[3]['desc'],res311[4]['desc'],res311[5]['desc'],res31[0]['week'], res31[0]['sunrise'], res31[0]['sunset'], res31[0]['wea'],res31[0]['humidity'],res31[0]['alarm'], res31[0]['air_level'], res31[0]['win'], res31[0]['win_speed'], res31[0]['tem'], res31[0]['tem2'], res31[0]['tem1']
 
 
 # 星座
@@ -266,7 +266,7 @@ lucky, finances, shuzi, aiqing, gongzuo, jiankang, guiren, gaishu = get_xingzuo(
 sure_new_loc, sure_new_hid, present, danger1, danger2 = get_Covid_19()
 jieri = get_yuandan(), get_chunjie(), get_taqing(), get_laodong(), get_duanwu(), get_zhongqiu(), get_guoqing()
 jieri2 = ''.join(list(filter(None, jieri)))
-alarm2 = alarm1.get('alarm_title')
+alarm2 = alarm1.get('alarm_level')
 
 
 def get_weather_icon(weather):
@@ -326,7 +326,7 @@ data = {
         "color": get_random_color()
     },
     "c": {
-        "value": aqi['air_level'],
+        "value": aqi,
         "color": get_random_color()
     },
     "d": {
