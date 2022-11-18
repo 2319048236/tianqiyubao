@@ -68,17 +68,6 @@ if template_id is None:
 # exit(422)
 
 # weather 直接返回对象，在使用的地方用字段进行调用。
-def get_weather_1():
-    if city is None:
-        print('请设置城市')
-        return None
-    url = "https://v0.yiketianqi.com/api?unescape=1&version=v61&appid=78158848&appsecret=650ylFRx&city=" + city
-    res1: Response = requests.get(url, verify=False)
-    if res1.status_code != 200:
-        return res1
-    res11 = res1.json()
-    return res11['alarm'], res11['aqi'], res11['win'], res11['win_speed'], res11['tem'], res11['tem2'], res11['tem1']
-
 def get_weather_3():
     url = "http://www.tianqiapi.com/api?version=v1&appid=78158848&appsecret=650ylFRx&city=" + city
     res3 = requests.get(url)
@@ -87,7 +76,7 @@ def get_weather_3():
     #res31 = xmltodict.parse(res3.text)['resp']
     res31 = res3.json()['data']
     res311 = res31[0]['index']
-    return res31[1]['wea'],res31[2]['wea'],res31[3]['wea'],res31[4]['wea'],res31[5]['wea'],res31[6]['wea'],res311[0]['desc'],res311[1]['desc'],res311[2]['desc'],res311[3]['desc'],res311[4]['desc'],res311[5]['desc'],res31[0]['week'], res31[0]['sunrise'], res31[0]['sunset'], res31[0]['wea'],res31[0]['humidity']
+    return res31[1]['wea'],res31[2]['wea'],res31[3]['wea'],res31[4]['wea'],res31[5]['wea'],res31[6]['wea'],res311[0]['desc'],res311[1]['desc'],res311[2]['desc'],res311[3]['desc'],res311[4]['desc'],res311[5]['desc'],res31[0]['week'], res31[0]['sunrise'], res31[0]['sunset'], res31[0]['wea'],res31[0]['humidity'],res31[0]['alarm'], res31[0]['aqi'], res31[0]['win'], res31[0]['win_speed'], res31[0]['tem'], res31[0]['tem2'], res31[0]['tem1']
 
 
 # 星座
@@ -271,8 +260,7 @@ except WeChatClientException as e:
     exit(502)
 
 wm = WeChatMessage(client)
-alarm1, aqi, win, win_speed, tem, tem1, tem2 = get_weather_1()
-Day_1, Day_2, Day_3, Day_4, Day_5, Day_6, Ultraviolet, jianfei, xuetang, dressing, xiche, air_pollution,week, sunrise, sunset, weather,humidity = get_weather_3()
+Day_1, Day_2, Day_3, Day_4, Day_5, Day_6, Ultraviolet, jianfei, xuetang, dressing, xiche, air_pollution,week, sunrise, sunset, weather,humidity,alarm1, aqi, win, win_speed, tem, tem1, tem2 = get_weather_3()
 lubarmonth, lunarday, jieqi, lunar_festival, festival = get_lunar_calendar()
 lucky, finances, shuzi, aiqing, gongzuo, jiankang, guiren, gaishu = get_xingzuo()
 sure_new_loc, sure_new_hid, present, danger1, danger2 = get_Covid_19()
