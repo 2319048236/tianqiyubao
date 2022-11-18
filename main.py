@@ -76,7 +76,7 @@ def get_weather_3():
     #res31 = xmltodict.parse(res3.text)['resp']
     res31 = res3.json()['data']
     res311 = res31[0]['index']
-    return res31[1]['wea'],res31[2]['wea'],res31[3]['wea'],res31[4]['wea'],res31[5]['wea'],res31[6]['wea'],res311[0]['desc'],res311[1]['desc'],res311[2]['desc'],res311[3]['desc'],res311[4]['desc'],res311[5]['desc'],res31[0]['week'], res31[0]['sunrise'], res31[0]['sunset'], res31[0]['wea'],res31[0]['humidity'],res31[0]['alarm'], res31[0]['aqi'], res31[0]['win'], res31[0]['win_speed'], res31[0]['tem'], res31[0]['tem2'], res31[0]['tem1']
+    return res31[1]['wea'],res31[2]['wea'],res31[3]['wea'],res31[4]['wea'],res31[5]['wea'],res31[6]['wea'],res311[0]['desc'],res311[1]['desc'],res311[2]['desc'],res311[3]['desc'],res311[4]['desc'],res311[5]['desc'],res31[0]['week'], res31[0]['sunrise'], res31[0]['sunset'], res31[0]['wea'],res31[0]['humidity'],res31[0]['alarm'], res31[0]['air'], res31[0]['win'], res31[0]['win_speed'], res31[0]['tem'], res31[0]['tem2'], res31[0]['tem1']
 
 
 # 星座
