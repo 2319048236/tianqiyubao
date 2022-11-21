@@ -298,7 +298,7 @@ data = {
         "color": get_random_color()
     },
     "5": {
-        "value": tem + "℃",
+        "value": tem,
         "color": get_random_color()
     },
     "6": {
@@ -306,7 +306,7 @@ data = {
         "color": get_random_color()
     },
     "7": {
-        "value": tem1 + "℃" + "~" + tem2 + "℃",
+        "value": tem1 + "~" + tem2,
         "color": get_random_color()
     },
     "8": {
