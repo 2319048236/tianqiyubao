@@ -90,19 +90,6 @@ def get_xingzuo():
         "content"], data[7]["content"], data[8]["content"]
 
 
-# 疫情接口
-def get_Covid_19():
-    url = "https://covid.myquark.cn/quark/covid/data?city=" + city
-    res3 = requests.get(url)
-    if res3.status_code != 200:
-        return res3
-    if city in ["北京", "上海", "天津", "重庆", "香港", "澳门", "台湾"]:
-        res31 = res3.json()["provinceData"]
-    else:
-        res31 = res3.json()["cityData"]
-    return res31["sure_new_loc"], res31["sure_new_hid"], res31["present"], res31["danger"]["1"], res31["danger"]["2"]
-
-
 # 农历接口
 def get_lunar_calendar():
     date = today.strftime("%Y-%m-%d")
@@ -263,7 +250,6 @@ wm = WeChatMessage(client)
 Day_1, Day_2, Day_3, Day_4, Day_5, Day_6, Ultraviolet, jianfei, xuetang, dressing, xiche, air_pollution,week, sunrise, sunset, weather,humidity,alarm1, aqi, win, win_speed, tem, tem1, tem2 = get_weather_3()
 lubarmonth, lunarday, jieqi, lunar_festival, festival = get_lunar_calendar()
 lucky, finances, shuzi, aiqing, gongzuo, jiankang, guiren, gaishu = get_xingzuo()
-sure_new_loc, sure_new_hid, present, danger1, danger2 = get_Covid_19()
 jieri = get_yuandan(), get_chunjie(), get_taqing(), get_laodong(), get_duanwu(), get_zhongqiu(), get_guoqing()
 jieri2 = ''.join(list(filter(None, jieri)))
 alarm2 = alarm1.get('alarm_level')
@@ -342,19 +328,19 @@ data = {
         "color": get_random_color()
     },
     "g": {
-        "value": sure_new_loc,
+        "value": ,
         "color": get_random_color()
     },
     "h": {
-        "value": sure_new_hid,
+        "value": ,
         "color": get_random_color()
     },
     "i": {
-        "value": present,
+        "value": ,
         "color": get_random_color()
     },
     "j": {
-        "value": str(danger1) + "/" + str(danger2),
+        "value": ,
         "color": get_random_color()
     },
     "k": {
