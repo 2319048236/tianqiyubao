@@ -214,7 +214,7 @@ def get_duanwu():
 def get_zhongqiu():
     mid_autumn_festival = LunarDate(lubaryear1, 8, 15).to_solar_date()
     next6 = (datetime.strptime(mid_autumn_festival.strftime("%Y-%m-%d"), "%Y-%m-%d") - today).days
-    if next6 < 0 or next5 > 15:
+    if next6 < 0 or next6 > 15:
         return None
     elif next6 > 0 and next6 <= 15:
         next6 = "距离中秋节还有" + str(next6) + "天"
