@@ -328,19 +328,19 @@ data = {
         "color": get_random_color()
     },
     "g": {
-        "value": ,
+        "value": "",
         "color": get_random_color()
     },
     "h": {
-        "value": ,
+        "value": "",
         "color": get_random_color()
     },
     "i": {
-        "value": ,
+        "value": "",
         "color": get_random_color()
     },
     "j": {
-        "value": ,
+        "value": "",
         "color": get_random_color()
     },
     "k": {
